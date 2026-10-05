@@ -15,6 +15,19 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
+export type Skills = {
+  _id: string
+  _type: 'skills'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  skillList?: Array<{
+    skillName?: string
+    iconClass?: string
+    _key: string
+  }>
+}
+
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'
@@ -217,6 +230,7 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | Skills
   | SanityImageAssetReference
   | Project
   | SanityImageCrop
