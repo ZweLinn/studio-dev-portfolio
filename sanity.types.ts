@@ -15,6 +15,98 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type Project = {
+  _id: string
+  _type: 'project'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  summary?: string
+  coverImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  gallery?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  description?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  >
+  techStack?: Array<string>
+  liveUrl?: string
+  repoUrl?: string
+  role?: string
+  startDate?: string
+  endDate?: string
+  featured?: boolean
+  order?: number
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
+}
+
 export type Experience = {
   _id: string
   _type: 'experience'
@@ -63,22 +155,6 @@ export type SanityImageMetadata = {
   thumbHash?: string
   hasAlpha?: boolean
   isOpaque?: boolean
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
 }
 
 export type SanityFileAsset = {
@@ -140,22 +216,18 @@ export type Geopoint = {
   alt?: number
 }
 
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
 export type AllSanitySchemaTypes =
+  | SanityImageAssetReference
+  | Project
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
   | Experience
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
-  | Slug
